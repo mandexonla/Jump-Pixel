@@ -8,6 +8,7 @@ public class PlayerMovements : MonoBehaviour
     [SerializeField] private float jumpForce = 10f;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
+    private Animator _animator;
 
     private bool isGrounded;
 
@@ -15,6 +16,7 @@ public class PlayerMovements : MonoBehaviour
 
     private void Awake()
     {
+        _animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -22,6 +24,7 @@ public class PlayerMovements : MonoBehaviour
     {
         rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
         HandleJump();
+        UpdateAnimation();
     }
 
     public void HandleMove(InputAction.CallbackContext context)
@@ -39,5 +42,15 @@ public class PlayerMovements : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
+    }
+
+    private void UpdateAnimation()
+    {
+        bool isRunning = Mathf.Abs(moveInput.x) > 0.1f;
+        bool isJumping = !isGrounded;
+        bool isFalling = !isGrounded && rb.velocity.y < -0.1f;
+        _animator.SetBool("isRunning", isRunning);
+        _animator.SetBool("isJumping", isJumping);
+        _animator.SetBool("isFalling", isFalling);
     }
 }
