@@ -5,6 +5,7 @@ public class PlayerMovements : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float moveSpeed = 5f;
+    [Header("Jump")]
     [SerializeField] private float jumpForce = 10f;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
@@ -20,10 +21,15 @@ public class PlayerMovements : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    private void FixedUpdate()
     {
         rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
-        HandleJump();
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
+    }
+
+    void Update()
+    {
+        //HandleJump();
         UpdateAnimation();
     }
 
@@ -35,13 +41,12 @@ public class PlayerMovements : MonoBehaviour
         else if (moveInput.x < 0) transform.localScale = new Vector3(-1, 1, 1);
     }
 
-    private void HandleJump()
+    public void HandleJump(InputAction.CallbackContext context)
     {
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (context.performed && isGrounded)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
     }
 
     private void UpdateAnimation()
