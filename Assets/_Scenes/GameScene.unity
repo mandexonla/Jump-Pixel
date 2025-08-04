@@ -7773,6 +7773,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOverScreen: {fileID: 1772950945}
+  playAgainButton: {fileID: 1384373159}
 --- !u!114 &2076792593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7786,6 +7787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameWinScreen: {fileID: 2034255672}
+  playAgainButton: {fileID: 583579850}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
