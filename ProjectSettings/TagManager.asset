@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Trap
+  - Cup
   layers:
   - Default
   - TransparentFX
@@ -54,4 +55,7 @@ TagManager:
     locked: 0
   - name: Traps
     uniqueID: 3696832277
+    locked: 0
+  - name: Cup
+    uniqueID: 160234033
     locked: 0

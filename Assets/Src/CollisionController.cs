@@ -9,5 +9,10 @@ public class CollisionController : MonoBehaviour
         {
             GameOverUI.isGameOver = true;
         }
+        else if (collision.gameObject.CompareTag("Cup"))
+        {
+            GameWinUI.isGameWon = true;
+        }
     }
+
 }
